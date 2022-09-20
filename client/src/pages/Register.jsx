@@ -50,19 +50,19 @@ export const Register = () => {
           type="text"
           placeholder="Name"
           value={user.name}
-         
+          onChange={(e) => setUser({ ...user, name: e.target.value })}
         />
         <input
           type="text"
           placeholder="Email"
           value={user.email}
-          
+          onChange={(e) => setUser({ ...user, email: e.target.value })}
         />
         <input
           type="password"
           placeholder="Password"
           value={user.password}
-         
+          onChange={(e) => setUser({ ...user, password: e.target.value })}
         />
          <button className="primary bg-primary" onClick={register}>
           Register

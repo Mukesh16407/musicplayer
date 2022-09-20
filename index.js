@@ -1,8 +1,8 @@
 const express = require('express');
 require('express-async-errors');
-const cors = require('cors')
+
 require('dotenv').config();
-const connect = require('./dbConfig/db.js');
+const dbConfig = require("./dbConfig/db");
 
 const userRoutes = require('./routes/userRoute');
 
@@ -11,13 +11,15 @@ const userRoutes = require('./routes/userRoute');
 
 const app = express();
 
-const port =process.env.PORT || 8080;
-
-
-
-connect();
-app.use(cors());
 app.use(express.json());
+
+const port =process.env.PORT || 5000;
+
+
+
+
+
+
 
 app.use('/api/users',userRoutes);
 // app.use('/api/login',authRoutes);

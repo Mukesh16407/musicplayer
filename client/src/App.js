@@ -2,9 +2,9 @@ import { Toaster } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import {Routes,Route} from 'react-router-dom';
 import { Spinner } from './components/Spinner';
-import { AddSong } from './pages/AddSong';
+
 import { Home } from './pages/Home';
-import { Login } from './pages/Login';
+
 import { Register } from './pages/Register';
 
 function App() {
@@ -15,8 +15,6 @@ function App() {
       <Toaster position="top-center" reverseOrder={false} />
       <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path='/addSong' element={<AddSong/>}/>
-        <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
       </Routes>
       
