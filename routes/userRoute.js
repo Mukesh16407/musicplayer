@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
-const authMiddleWare = require("../middleware/authMiddleware");
+const authMiddleware = require("../middleware/authMiddleware");
 
 
 router.post('/register',async(req,res)=>{
@@ -68,5 +68,17 @@ router.post('/login', async(req,res)=>{
   }
 
 })
-
+router.post('/get-user-data',authMiddleware, async(req,res)=>{
+  try{
+    const user = await User.findById(req.body.userId);
+    user.password = undefined;
+    return res.status(200).send({
+      message: "User data fetched successfully",
+      success: true,
+      data: user,
+    });
+  }catch(error){
+    return res.status(500).send({ message: error.message, success: false });
+  }
+})
 module.exports = router;
