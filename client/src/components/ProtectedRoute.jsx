@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { HideLoading, ShowLoading } from "../redux/alertSlice";
 import { SetUser } from "../redux/userSlice";
+import { DefaultLayout } from "./DefaultLayout";
 
 export const ProtectedRoute = ({ children }) => {
   const { user } = useSelector((state) => state.user);
@@ -47,5 +48,5 @@ export const ProtectedRoute = ({ children }) => {
   }, []);
 
  
-  return <div>{ children }</div>;
+  return <div>{readyToRender && <DefaultLayout>{children}</DefaultLayout>}</div>;
 };

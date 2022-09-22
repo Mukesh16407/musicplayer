@@ -1,4 +1,6 @@
 import React from 'react'
+import { Player } from '../components/Player'
+import { PlayList } from '../components/PlayList'
 import { SongList } from '../components/SongList'
 
 
@@ -10,7 +12,11 @@ export const Home = () => {
       <div className="w-1/2">
         <SongList/>
       </div>
+      <div className="w-1/2">
+          <PlayList />
+        </div>
       </div>
+      <Player/>
     </>
   )
 }
