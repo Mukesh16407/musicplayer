@@ -10,7 +10,7 @@ import {
     SetSelectedPlaylistForEdit,
     SetUser,
   } from "../redux/userSlice";
-
+import { Player } from "../components/Player";
 export const CreateEditPlayList = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
@@ -147,7 +147,28 @@ export const CreateEditPlayList = () => {
 
     </div>
     <h1 className="my-5 text-2xl">Selected Songs - {selectedSongs.length}</h1>
-    
+    <div className="grid grid-cols-3 gap-3">
+      {allSongs.map((song, index)=>{
+         const isSelected = selectedSongs.find((s) => s._id === song._id);
+
+         return(
+          <div  className={`p-2 flex items-center shadow justify-between border cursor-pointer rounded ${
+            isSelected ? "border-active border-2" : "border-gray-300"
+          }`}
+          onClick={() => selectUnselectSong(song)}>
+            <div>
+                <h1>{song.title} </h1>
+                <h1>
+                  {song.artist} - {song.album} - {song.year}
+                </h1>
+              </div>
+
+          </div>
+         )
+      })
+      }
+    </div>
+    <Player/>
   </div>
   )
 };

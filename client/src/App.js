@@ -8,6 +8,7 @@ import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { AdminHome } from "./pages/Admin/AdminHome";
+import { CreateEditPlayList } from "./pages/CreateEditPlayList";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
@@ -29,7 +30,7 @@ function App() {
           element={
             <PublicRoute>
               {" "}
-              <Register />{" "}
+              <Register />
             </PublicRoute>
           }
         />
@@ -41,6 +42,14 @@ function App() {
             </PublicRoute>
           }
         />
+        <Route
+            path="/create-edit-playlist"
+            element={
+              <ProtectedRoute>
+                <CreateEditPlayList />
+              </ProtectedRoute>
+            }
+          />
         <Route
           path="/admin"
           element={
