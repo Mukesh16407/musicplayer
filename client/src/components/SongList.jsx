@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { SetCurrentSong, SetCurrentSongIndex, SetSelectedPlaylist } from '../redux/userSlice';
 
 export const SongList = () => {
 
@@ -10,6 +12,24 @@ export const SongList = () => {
       const [songsToPlay, setSongsToPlay] = useState([]);
       const dispatch = useDispatch();
       const [searchKey, setSearchKey] = useState("");
+
+      useEffect(()=>{
+        if (selectedPlaylist){
+          if (selectedPlaylist && selectedPlaylist.name === "All Songs" &&
+            searchKey !== ""){
+              const tempSongs = [];
+              selectedPlaylist.songs.forEach((song) => {
+             if (JSON.stringify(song).toLowerCase().includes(searchKey)) {
+                  tempSongs.push(song);
+                }
+              });
+              console.log(tempSongs);
+             setSongsToPlay(tempSongs);
+            }else{
+              setSongsToPlay(selectedPlaylist?.songs);
+            }
+        }
+      },[selectedPlaylist, searchKey])
   return (
     <div className="flex flex-col gap-3">
         <div className="pl-3 pr-6">
@@ -17,6 +37,16 @@ export const SongList = () => {
             type="text"
             placeholder="Song , Artist , Album"
             className="rounded w-full"
+            onFocus={() =>
+              dispatch(
+                SetSelectedPlaylist({
+                  name: "All Songs",
+                  songs: allSongs,
+                })
+              )
+            }
+            value={searchKey}
+            onChange={(e) => setSearchKey(e.target.value)}
             />
 
         </div>
@@ -27,7 +57,11 @@ export const SongList = () => {
               return(
                 <div className={`p-2 text-gray-600 flex items-center justify-between cursor-pointer ${
                     isPlaying && "shadow rounded text-active font-semibold border-active border-2"
-                  }`}>
+                  }`}
+                  onClick={() => {
+                    dispatch(SetCurrentSong(song));
+                    dispatch(SetCurrentSongIndex(index));
+                  }}>
                     <div>
                         <h1>{song.title}</h1>
                         <h1>{song.artist} {song.album} {song.year}</h1>

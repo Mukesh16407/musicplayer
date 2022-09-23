@@ -5,9 +5,8 @@ require('dotenv').config();
 const dbConfig = require("./dbConfig/db");
 
 const userRoutes = require('./routes/userRoute');
+const songsRoute = require('./routes/songsRoute');
 
-// const songRoutes = require('./routes/songs');
-// const artistListRoutes = require('./routes/artist')
 
 const app = express();
 
@@ -22,10 +21,7 @@ const port =process.env.PORT || 5000;
 
 
 app.use('/api/users',userRoutes);
-// app.use('/api/login',authRoutes);
-// app.use('/api/song',songRoutes);
-// app.use('/api/artists',artistListRoutes);
-
+app.use("/api/songs", songsRoute);
 
 app.listen(port,()=>{
     console.log(`listening on port ${port}`)
