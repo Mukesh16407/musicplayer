@@ -9,6 +9,7 @@ import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { AdminHome } from "./pages/Admin/AdminHome";
 import { CreateEditPlayList } from "./pages/CreateEditPlayList";
+import { AddEditSong } from "./pages/Admin/AddEditSong";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
@@ -58,6 +59,14 @@ function App() {
             </ProtectedRoute>
           }
         />
+         <Route
+            path="/admin/add-edit-song"
+            element={
+              <ProtectedRoute>
+                <AddEditSong />
+              </ProtectedRoute>
+            }
+          />
       </Routes>
     </div>
   );

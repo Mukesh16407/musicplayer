@@ -21,7 +21,9 @@ export const AdminHome = () => {
     <div>
         <div className="flex justify-between">
         <h1 className="text-3xl text-gray-700">All Songs</h1>
-        <button className="text-white bg-orange-500 py-2 px-5">
+        <button className="text-white bg-orange-500 py-2 px-5"onClick={() => {
+            navigate("/admin/add-edit-song");
+          }}>
           Add Song
         </button>
         </div>
@@ -47,6 +49,9 @@ export const AdminHome = () => {
               <td>
                 <i
                   className="ri-pencil-line text-2xl text-gray-500"
+                  onClick={() => {
+                    navigate("/admin/add-edit-song/?id=" + song._id);
+                  }}
                 ></i>
               </td>
             </tr>
